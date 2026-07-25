@@ -1,0 +1,53 @@
+{
+  // Open this folder in VS Code, run "ng serve" in a terminal, then use the
+  // "Debug ng serve" configuration below (F5) to attach VS Code's debugger
+  // directly to the running Angular app in Chrome.
+  "version": "0.2.0",
+  "configurations": [
+    {
+      // Launches a fresh Chrome instance pointed at the dev server and lets
+      // VS Code set breakpoints directly in your .ts files via source maps.
+      "name": "Launch Chrome against localhost",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:4200",
+      "webRoot": "${workspaceFolder}",
+      "sourceMaps": true,
+      "sourceMapPathOverrides": {
+        "webpack:/*": "${webRoot}/*",
+        "/./*": "${webRoot}/*",
+        "/src/*": "${webRoot}/*",
+        "/*": "*",
+        "/./~/*": "${webRoot}/node_modules/*"
+      }
+    },
+    {
+      // Use this instead if Chrome is already open (e.g. you started it manually
+      // with --remote-debugging-port=9222) and you just want VS Code to attach.
+      "name": "Attach to Chrome",
+      "type": "chrome",
+      "request": "attach",
+      "port": 9222,
+      "webRoot": "${workspaceFolder}",
+      "sourceMaps": true
+    },
+    {
+      // Runs Karma/Jasmine unit tests with the debugger attached, so breakpoints
+      // set inside *.spec.ts files are hit while `ng test` runs.
+      "name": "Debug Karma Unit Tests",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:9876/debug.html",
+      "webRoot": "${workspaceFolder}",
+      "sourceMaps": true
+    }
+  ],
+  "compounds": [
+    {
+      // Runs "ng serve" as a pre-launch task, then attaches Chrome once it's ready.
+      "name": "ng serve + Debug Chrome",
+      "configurations": ["Launch Chrome against localhost"],
+      "preLaunchTask": "npm: start"
+    }
+  ]
+}
